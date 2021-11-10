@@ -1,2 +1,2 @@
 # web application on MVC
-menthor Viktor Zinchenko
+Menthor is Viktor Zinchenko
