@@ -1,22 +1,21 @@
 <?php
 
-include_once( ROOT . '/models/News.php');
+require ROOT . '/components/Debug.php';
+require ROOT . '/models/Index.php';
+require ROOT . '/models/News.php';
 
+
+// контроллер главной страницы
 class IndexController
 {
-    // главная страница
-    public function actionIndex()
-    {
+  public function actionIndex(){
 
-        // делаем выборку новостей по категориям и кладем в переменные
-        $footballNews = News::getNewsListByCategory(1);
-        $formulaoneNews = News::getNewsListByCategory(2);
-        $basketballNews = News::getNewsListByCategory(3);
-        $tennisNews = News::getNewsListByCategory(4);
-        $hockeyNews = News::getNewsListByCategory(5);
+    $newsList = News::getCategoryNews();
+    //Debug::dd($newsList);
 
-        require_once(ROOT . '/views/index.php');
+    require ROOT . '/views/index/index.php';
 
-        return true;
-    }
+    return true;
+  }
 }
+//  /template/images/news/wolf1-test.jpg

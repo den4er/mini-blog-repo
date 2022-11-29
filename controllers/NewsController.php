@@ -1,70 +1,34 @@
 <?php
 
-include_once( ROOT . '/models/News.php');
+require ROOT . '/components/Debug.php';
+require ROOT . '/models/News.php';
 
-
+// контроллер страницы с новостями
 class NewsController
 {
-    // просмотр списка новостей
-    public function actionIndex()
-    {
+  public function actionIndex(){// метод отображения списка новостей
 
-        $news_list = array();
-        $news_list = News::getNewsList();
+    $newsList = News::getCategoryNews();
+    //Debug::d($newsList);
 
-        require_once(ROOT . '/views/news/index.php');
+    require ROOT . '/views/news/index.php';
 
-        return true;
+    return true;
+  }
+
+  public function actionView($id){ // метод отображения одной новости детально
+    if($id){
+      // новость для основного списка
+      $newsItem = News::getNewsItemById($id);
+      $newsItem['text'] = str_replace("\r\n\r\n", '</p><p>', $newsItem['text']);
+      //Debug::d($newsItem);
+
+      // популярные посты
+      $popularItems = News::getPopularNews(3);
+
+      require ROOT . '/views/news/view.php';
     }
 
-    // просмотр одной новости по ID
-    public function actionDetail($id)
-    {
-        if($id)
-        {
-            $id = $id[0];
-
-            $newsItem = News::getNewsItemById( $id );
-
-            require_once(ROOT . '/views/news/view.php');
-
-        }
-
-        return true;
-    }
-
-    // просмотр новостей в категории
-    public function actionCategoryList( $category )
-    {
-        $category = $category[0];
-
-
-        switch ( $category ) {
-            case 'football':
-                $categoryId = 1;
-                break;
-            case 'formulaone':
-                $categoryId = 2;
-                break;
-            case 'basketball':
-                $categoryId = 3;
-                break;
-            case 'tennis':
-                $categoryId = 4;
-                break;
-            case 'hockey':
-                $categoryId = 5;
-                break;
-            default:
-                $categoryId = 1;
-        }
-
-
-        $news_list = array();
-        $news_list = News::getNewsListByCategory( $categoryId );
-
-        require_once(ROOT . '/views/news/index.php');
-
-        return true;
-    }
+    return true;
+  }
 }

@@ -1,22 +1,22 @@
 <?php
 
-/*
- *
- *
- * Класс для получения объекта подключения к БД
- *
- *
- * */
+
 class Db
 {
-    public static function getConnection()
-    {
-        $paramsPath = ROOT . '/config/db_params.php'; // получаем путь до параметров подключения
-        $params = include($paramsPath); // подключаем файл с параметрами и записываем их в переменную
+  // статические свойства класса
+  private static $dbName = 'mini_blog';
+  private static $dbHost = 'localhost';
+  private static $dbLogin = 'root';
+  private static $dbPassword = '';
 
-        $dsn = "mysql:host={$params['host']};dbname={$params['dbname']};charset=UTF8"; // создаем dsn для подключения
-        $db = new PDO( $dsn, $params['user'], $params['password'] ); // создаем объект подключения к бд
+  // защищенный статический метод для получения DSN
+  private static function getDSN(){
+    return "mysql:host=".self::$dbHost.";dbname=".self::$dbName;
+  }
 
-        return $db;
-    }
+  // публичный статический метод для установки соединения с бд
+  public static function getConnection(){
+    return new PDO(self::getDSN(), self::$dbLogin, self::$dbPassword, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+  }
+
 }

@@ -1,31 +1,18 @@
 <?php
-
 // FRONT CONTROLLER
+//echo $_SERVER['REQUEST_URI'];
 
-// 1. Общие настройки
+// 1 общие настройки
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-    ini_set('display_errors', 1); // включаем отображение ошибок
-    error_reporting(E_ALL);         // отображать все ошибки
+// 2 подключение файлов системы
+define( 'ROOT', dirname(__FILE__) ) ;
+require ROOT . '/components/Router.php';
 
-// 2. Подключение файлов системы
+// 3 подключение к БД
+require ROOT . '/components/Db.php';
 
-    define( 'ROOT', dirname(__FiLE__)); // определяем константу корневой папки
-    require_once(ROOT.'/components/Router.php'); // подключаем клас роутер (Router.php)
-    require_once(ROOT.'/components/Db.php'); // подключаем класс подключения к бд
-
-
-// 3. Установка соединения с БД
-
-    // connect db
-//    try {
-//        $dbh = new PDO('mysql:host=localhost;dbname=testsite', 'root', '');
-//    } catch (PDOException $e) {
-//        print "Error!: " . $e->getMessage() . "<br/>";
-//        die();
-//    }
-
-// 4. Вызов Router
-
-    $router = new Router();
-    $router->run();
-
+// 4 вызов Router
+$router = new Router();
+$router->run();
