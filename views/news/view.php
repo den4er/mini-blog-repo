@@ -14,7 +14,8 @@ require 'views/components/header.php';
                 <div class="post-entry text-center">
 
                     <?php foreach($newsItem['categories'] as $category): ?>
-                        <span class="post-category text-white <?=$category['class_name']?> mb-3"><?=$category['title']?></span>
+                        <span class="post-category text-white <?=$category['class_name']?>
+                        mb-3"><?=$category['translation']?></span>
                     <?php endforeach; ?>
 
                     <h1 class="mb-4"><a href="#"><?=$newsItem['title']?></a></h1>

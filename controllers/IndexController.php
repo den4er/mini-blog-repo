@@ -1,6 +1,5 @@
 <?php
 
-require ROOT . '/components/Debug.php';
 require ROOT . '/models/Index.php';
 require ROOT . '/models/News.php';
 

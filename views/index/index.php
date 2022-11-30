@@ -74,7 +74,8 @@
             <div class="excerpt">
 
               <?php foreach($newsItem['categories'] as $category):?>
-                <span class="post-category text-white <?=$category['class_name']?> mb-3"><?=$category['title']?></span>
+                <span class="post-category text-white <?=$category['class_name']?>
+                mb-3"><?=$category['translation']?></span>
               <?php endforeach;?>
 
               <h2><a href="/news/<?=$newsItem['news_id']?>"><?=$newsItem['title']?></a></h2>

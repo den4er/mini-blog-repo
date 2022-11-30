@@ -20,10 +20,15 @@ require 'views/components/header.php';
                     <a href="/news/<?=$newsItem['news_id']?>"><img src="<?=$newsItem['image']?>" alt="Image" class="img-fluid rounded"></a>
                     <div class="excerpt">
 
+                        <?php if(isset($newsItem['categories'])):?>
                         <?php foreach ( $newsItem['categories'] as $key => $category) :?>
                             <span class="post-category text-white <?=$category['class_name']?>
-                            mb-3"><?=$category['title']?></span>
+                            mb-3"><?=$category['translation']?></span>
                         <?php endforeach;?>
+                        <?php else:?>
+                            <span class="post-category text-white <?=$newsItem['class_name']?>
+                            mb-3"><?=$newsItem['translation']?></span>
+                        <?php endif;?>
 
                         <h2><a href="/news/<?=$newsItem['news_id']?>"><?=$newsItem['title']?></a></h2>
                         <div class="post-meta align-items-center text-left clearfix">

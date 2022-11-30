@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 // 2 подключение файлов системы
 define( 'ROOT', dirname(__FILE__) ) ;
 require ROOT . '/components/Router.php';
+require ROOT . '/components/Debug.php';
 
 // 3 подключение к БД
 require ROOT . '/components/Db.php';

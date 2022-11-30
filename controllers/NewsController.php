@@ -1,6 +1,5 @@
 <?php
 
-require ROOT . '/components/Debug.php';
 require ROOT . '/models/News.php';
 
 // контроллер страницы с новостями
@@ -28,6 +27,17 @@ class NewsController
 
       require ROOT . '/views/news/view.php';
     }
+
+    return true;
+  }
+
+  // выборка новостей по категории
+  public function actionCategory($category){
+    echo "Категория $category";
+    $newsList = News::getNewsListByCategory($category);
+    //Debug::d($newsList);
+
+    require ROOT . '/views/news/index.php';
 
     return true;
   }

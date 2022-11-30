@@ -52,12 +52,7 @@
         <div class="col-8 text-right">
           <nav class="site-navigation" role="navigation">
             <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-              <li><a href="/news/">News</a></li>
-              <li><a href="#">Politics</a></li>
-              <li><a href="#">Tech</a></li>
-              <li><a href="#">Entertainment</a></li>
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Sports</a></li>
+              <?php require 'nav.php';?>
               <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
             </ul>
           </nav>
