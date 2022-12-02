@@ -17,4 +17,3 @@ class IndexController
     return true;
   }
 }
-//  /template/images/news/wolf1-test.jpg

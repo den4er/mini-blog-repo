@@ -2,7 +2,6 @@
 /**
  * Class News - модель для получения данных о новостях
  */
-// 644 * 429
 class News
 {
 
@@ -110,11 +109,26 @@ class News
   }
 
   /**
+   * получение данных по одной категорий по title
+   */
+  public static function getCategoryByTitle($title){
+    $pdo = DB::getConnection(); // подключение к бд
+
+    $query = "SELECT id, title, translation, description, class_name 
+              FROM category
+              WHERE title = ?";
+    $stm = $pdo->prepare($query);
+    $stm->execute([$title]);
+    return $stm->fetch();
+  }
+
+  /**
    * получение списка новостей по выбранной категории
    */
   public static function getNewsListByCategory($category){
     $pdo = DB::getConnection(); // подключение к бд
-    $query = "SELECT news.id as news_id, news.title, text, add_date, image, 
+    $query = "SELECT category.id as category_id, category.title as category_title, translation, description, class_name,
+                news.id as news_id, news.title, text, add_date, image, 
                 authors.id as author_id, first_name, last_name, avatar
                 FROM category, news_category, news, authors
                 WHERE category.id = category_id AND
@@ -124,8 +138,23 @@ class News
     $stm = $pdo->prepare($query);
     $stm->execute([$category]);
 
-    $newsList =  $stm->fetchAll();
+    $newsList = $stm->fetchAll();
     return self::addCategory($newsList); // добавляем категории и возвращаем итоговый список новостей
+  }
+
+  /**
+   * получение списка категорий с количеством новостей в каждой категории
+   */
+  public static function countNewsByCategories(){
+    $pdo = DB::getConnection(); // подключение к бд
+
+    $query = "SELECT category_id, title, translation, COUNT(*) as count
+              FROM news_category, category 
+              WHERE category.id = category_id 
+              GROUP BY category_id;";
+
+    return $pdo->query($query)->fetchAll();
+
   }
 
 }

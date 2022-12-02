@@ -1,16 +1,31 @@
 <?php
 require 'views/components/header.php';
-?>
 
+//Debug::d($newsList);
+?>
+<div class="py-5 bg-light">
+    <div class="container">
+        <?php if(isset($category)):?>
+            <div class="row">
+                <div class="col-md-12">
+                    <span>Категория</span>
+                    <h3><?=$category['translation']?></h3>
+                    <p><?=$category['description']?></p>
+                </div>
+            </div>
+        <?php else:?>
+            <div class="row">
+                <div class="col-12">
+                    <h2>Все новости</h2>
+                </div>
+            </div>
+        <?php endif;?>
+
+    </div>
+</div>
 
 <div class="site-section bg-white">
     <div class="container">
-
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2>Все новости</h2>
-            </div>
-        </div>
 
         <div class="row">
 

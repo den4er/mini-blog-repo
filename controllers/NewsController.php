@@ -20,12 +20,14 @@ class NewsController
   public function actionView($id){ // метод отображения одной новости детально
     if($id){
       // новость для основного списка
-      $newsItem = News::getNewsItemById($id);
+      $newsItem = News::getNewsItemById($id); // получаем новость
       $newsItem['text'] = str_replace("\r\n\r\n", '</p><p>', $newsItem['text']);
-      //Debug::d($newsItem);
-
+      // получаем список категорий с подсчетом новостей по каждой из них
+      $totalNewsByCategory = News::countNewsByCategories();
       // популярные посты
       $popularItems = News::getPopularNews(3);
+
+      //Debug::d($totalNewsByCategory);
 
       require ROOT . '/views/news/view.php';
     }
@@ -35,8 +37,10 @@ class NewsController
 
   // выборка новостей по категории
   public function actionCategory($category){
+    // получаем новости по нужной категории
     $newsList = News::getNewsListByCategory($category);
-    //Debug::d($newsList);
+    $category = News::getCategoryByTitle($category);
+    //Debug::d($category);
 
     require ROOT . '/views/news/index.php';
 
