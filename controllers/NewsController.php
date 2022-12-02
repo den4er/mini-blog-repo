@@ -5,7 +5,9 @@ require ROOT . '/models/News.php';
 // контроллер страницы с новостями
 class NewsController
 {
-  public function actionIndex(){// метод отображения списка новостей
+
+  // метод отображения списка новостей
+  public function actionIndex(){
 
     $newsList = News::getCategoryNews();
     //Debug::d($newsList);
@@ -33,7 +35,6 @@ class NewsController
 
   // выборка новостей по категории
   public function actionCategory($category){
-    echo "Категория $category";
     $newsList = News::getNewsListByCategory($category);
     //Debug::d($newsList);
 

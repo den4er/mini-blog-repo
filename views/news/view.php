@@ -1,5 +1,7 @@
 <?php
 require 'views/components/header.php';
+
+Debug::d($newsItem);
 //echo '<pre>';
 //print_r($newsItem);
 //die();
@@ -60,7 +62,7 @@ require 'views/components/header.php';
                 <div class="pt-5">
                     <p>Категории:
                         <?php foreach($newsItem['categories'] as $category): ?>
-                            <a href="#"><?=$category['title']?></a>
+                            <a href="/news/<?=$category['title']?>"><?=$category['translation']?></a>
                         <?php endforeach; ?>
                         Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
                 </div>
