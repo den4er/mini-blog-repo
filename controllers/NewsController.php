@@ -73,10 +73,15 @@ makeTree($res);
 function makeTree($arr, $root = 0) {
   echo "<ul>";
   foreach($arr[$root] as $i) {
-    echo "<li>";
+    echo "<li id='$i[0]'>";
     echo $i[1];
+    echo "<form method='POST'>";
+    echo "<input type='hidden' name='comment_id' value='$i[0]'>";
+    echo "<input type='submit' name='action' value='Ответить'>";
+    echo "</form>";
     if (isset($arr[$i[0]])) MakeTree($arr, $i[0]);
     echo "</li>";
+
   }
   echo "</ul>";
 }
