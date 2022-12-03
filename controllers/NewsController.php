@@ -47,3 +47,36 @@ class NewsController
     return true;
   }
 }
+
+// тест вывода комментариев к новости
+$comments = [
+  ['id' => '1', 'parent_id' => '0', 'text' => 'первый комментарий'],
+  ['id' => '2', 'parent_id' => '0', 'text' => 'второй комментарий' ],
+  ['id' => '3', 'parent_id' => '0', 'text' => 'третий комментарий'],
+  ['id' => '4', 'parent_id' => '2', 'text' => 'первый ответ'],
+  ['id' => '5', 'parent_id' => '0', 'text' => 'четвертый комментарий'],
+  ['id' => '6', 'parent_id' => '0', 'text' => 'пятый комментарий'],
+  ['id' => '7', 'parent_id' => '2', 'text' => 'второй ответ'],
+  ['id' => '8', 'parent_id' => '4', 'text' => 'третий ответ'],
+  ['id' => '9', 'parent_id' => '0', 'text' => 'шестой комментарий'],
+];
+
+
+$res = [];
+
+foreach($comments as $key => $value) {
+  $res[$value['parent_id']][] = [ $value['id'], $value['text'] ];
+}
+
+makeTree($res);
+
+function makeTree($arr, $root = 0) {
+  echo "<ul>";
+  foreach($arr[$root] as $i) {
+    echo "<li>";
+    echo $i[1];
+    if (isset($arr[$i[0]])) MakeTree($arr, $i[0]);
+    echo "</li>";
+  }
+  echo "</ul>";
+}
