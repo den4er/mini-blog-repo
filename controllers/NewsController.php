@@ -6,6 +6,29 @@ require ROOT . '/models/News.php';
 class NewsController
 {
 
+  // рекурсивный метод построения дерева комментариев
+  private static function  makeTree($arr, $root = 0, $level = 0) {
+    $ulClass = $level?'children':'comment-list';
+
+    echo "<ul class='$ulClass'>";
+      foreach($arr[$root] as $i) {
+        echo "<li  class='comment' id='$i[0]'>";
+          echo '<div class="vcard">';
+              echo '<img src="/template/images/authors/rachel-green.jpg" alt="Image placeholder">';
+          echo '</div>';
+          echo '<div class="comment-body">';
+            echo '<h3>Jean Doe</h3>';
+            echo '<div class="meta">January 9, 2018 at 2:21pm</div>';
+            echo '<p>'. $i[1] .'</p>';
+            echo '<p><a href="#" class="reply rounded">Reply</a></p>';
+          echo '</div>';
+          if (isset($arr[$i[0]])) self::makeTree($arr, $i[0], ++$level);
+        echo "</li>";
+
+      }
+    echo "</ul>";
+  }
+
   // метод отображения списка новостей
   public function actionIndex(){
 
@@ -17,17 +40,23 @@ class NewsController
     return true;
   }
 
-  public function actionView($id){ // метод отображения одной новости детально
+  // метод отображения одной новости детально
+  public function actionView($id){
     if($id){
-      // новость для основного списка
       $newsItem = News::getNewsItemById($id); // получаем новость
       $newsItem['text'] = str_replace("\r\n\r\n", '</p><p>', $newsItem['text']);
+
       // получаем список категорий с подсчетом новостей по каждой из них
       $totalNewsByCategory = News::countNewsByCategories();
+
       // популярные посты
       $popularItems = News::getPopularNews(3);
 
-      //Debug::d($totalNewsByCategory);
+      // комментарии
+      $comments = News::getCommentsByNewsId($id);// получаем комментарии
+
+
+      //Debug::d($comments);
 
       require ROOT . '/views/news/view.php';
     }
@@ -47,7 +76,7 @@ class NewsController
     return true;
   }
 }
-
+/*
 // тест вывода комментариев к новости
 $comments = [
   ['id' => '1', 'parent_id' => '0', 'text' => 'первый комментарий'],
@@ -85,3 +114,4 @@ function makeTree($arr, $root = 0) {
   }
   echo "</ul>";
 }
+*/
