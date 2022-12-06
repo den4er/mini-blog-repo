@@ -64,8 +64,9 @@ require 'views/components/header.php';
                 <!-- комментарии к новости -->
                 <div class="pt-5">
                     <h3 class="mb-5">Количество комментариев: <?=$commentsCount;?></h3>
-                    <?php self::makeTree($comments);?>
-
+                    <?php if($commentsCount):?>
+                        <?php self::makeTree($comments);?>
+                    <?php endif;?>
 
                     <div class="comment-form-wrap pt-5">
                         <h3 class="mb-5">Leave a comment</h3>

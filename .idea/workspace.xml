@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/db_params.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/NewsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/News.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/News.php" afterDir="false" />
@@ -74,7 +75,7 @@
       <workItem from="1670150278321" duration="5128000" />
       <workItem from="1670180603818" duration="2067000" />
       <workItem from="1670183150435" duration="9000" />
-      <workItem from="1670334276311" duration="5271000" />
+      <workItem from="1670334276311" duration="5857000" />
     </task>
     <servers />
   </component>
