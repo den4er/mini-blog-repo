@@ -163,25 +163,23 @@ class News
   public static function getCommentsByNewsId($id){
     $pdo = DB::getConnection(); // подключение к бд
 
-    // пока статический массив, реализовать выборку из бд по id новости
-    $comments = [
-      ['id' => '1', 'parent_id' => '0', 'text' => 'первый комментарий'],
-      ['id' => '2', 'parent_id' => '0', 'text' => 'второй комментарий' ],
-      ['id' => '3', 'parent_id' => '0', 'text' => 'третий комментарий'],
-      ['id' => '4', 'parent_id' => '2', 'text' => 'первый ответ'],
-      ['id' => '5', 'parent_id' => '0', 'text' => 'четвертый комментарий'],
-      ['id' => '6', 'parent_id' => '0', 'text' => 'пятый комментарий'],
-      ['id' => '7', 'parent_id' => '2', 'text' => 'второй ответ'],
-      ['id' => '8', 'parent_id' => '4', 'text' => 'третий ответ'],
-      ['id' => '9', 'parent_id' => '0', 'text' => 'шестой комментарий'],
-    ];
+    $query = "SELECT comments.id, parent_id, comment as text, comments.add_date, 
+              users.id as user_id, login, first_name, last_name, image
+              FROM comments, users
+              WHERE comments.user_id = users.id AND
+                    news_id = ?;";
+    $result = $pdo->prepare($query);
+    $result->execute([$id]);
+    $count = $result->rowCount();
+
+    $comments = $result->fetchAll();
+
     $res = [];
-
-    foreach($comments as $key => $value) {
-      $res[$value['parent_id']][] = [ $value['id'], $value['text'] ];
+    foreach($comments as $key => $value) {// переформатируем массив для вывода через рекурсивную функцию
+      $res[$value['parent_id']][] = [ 'id' => $value['id'], 'text' => $value['text'], 'add_date' => $value['add_date'],
+        'user_id' => $value['user_id'], 'login' => $value['login'], 'first_name' => $value['first_name'],
+        'last_name' => $value['last_name'], 'image' => $value['image']];
     }
-    return $res;
-
+    return [$res, $count];
   }
-
 }

@@ -63,7 +63,7 @@ require 'views/components/header.php';
 
                 <!-- комментарии к новости -->
                 <div class="pt-5">
-                    <h3 class="mb-5">6 Comments</h3>
+                    <h3 class="mb-5">Количество комментариев: <?=$commentsCount;?></h3>
                     <?php self::makeTree($comments);?>
 
 
