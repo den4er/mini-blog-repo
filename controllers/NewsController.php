@@ -90,3 +90,5 @@ class NewsController
   }
 
 }
+
+// /template/images/news/vaza2.jpg     644 * 429
